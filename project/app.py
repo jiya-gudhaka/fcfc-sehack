@@ -22,7 +22,7 @@ model_map = {
 
 # Streamlit setup
 st.set_page_config(page_title="Real-time Detection Dashboard", layout="wide")
-st.title("🧠 Real-time Multi-Model ML Detection")
+st.title("Inspector Clouseau")
 
 # Sidebar: model selection
 selected_models = st.sidebar.multiselect(
