@@ -17,7 +17,7 @@ model_map = {
     "Crowd": model_crowd,
     "Loitering": model_loi,
     "Night Anamoly": model_night,
-    "VIolence Detection": model_violence3,
+    "Violence Detection": model_violence3,
 }
 
 # Streamlit setup
@@ -54,9 +54,17 @@ while run:
     # Optional: Flip frame to mirror webcam
     frame = cv2.flip(frame, 1)
 
+    alert = None  # Reset alert flag
+
     # Apply selected models
     for model_name in selected_models:
-        frame = model_map[model_name].process_frame(frame)
+        frame, alert = model_map[model_name].process_frame(frame)
+        
+        if alert:
+            st.error(alert)  # Show the alert
+    
+    result = model_map[model_name].process_frame(frame)
+    print(result)  # See what it returns
 
     # Convert to RGB for Streamlit display
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
